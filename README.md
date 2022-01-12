@@ -1,1 +1,1 @@
-# devops-stack-module-loki-minio
+# devops-stack-module-minio
