@@ -1,0 +1,27 @@
+minio:
+  accessKey: "${replace(minio.access_key, "\"", "\\\"")}"
+  secretKey: "${replace(minio.secret_key, "\"", "\\\"")}"
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "${cluster_issuer}"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      traefik.ingress.kubernetes.io/router.tls: "true"
+      ingress.kubernetes.io/ssl-redirect: "true"
+      kubernetes.io/ingress.allow-http: "false"
+    hosts:
+      - "${minio.domain}"
+      - "minio.apps.${base_domain}"
+    tls:
+      - secretName: minio-tls
+        hosts:
+          - "${minio.domain}"
+          - "minio.apps.${base_domain}"
+  %{ if length(minio.extra_buckets) > 0 }
+  buckets:
+  %{ for bucket in minio.extra_buckets }
+    - name: bucket.name
+      policy: none
+      purge: false
+  %{ endfor }
+  %{ endif }
