@@ -19,8 +19,8 @@ minio:
           - "minio.apps.${base_domain}"
   %{ if length(minio.buckets) > 0 }
   buckets:
-  %{ for bucket in minio.buckets }
-    - name: bucket.name
+  %{ for name, bucket in minio.buckets }
+    - name: ${name}
       policy: none
       purge: false
   %{ endfor }
