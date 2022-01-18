@@ -36,6 +36,6 @@ variable "profiles" {
 variable "minio" {
   type = any
   default = {
-    extra_buckets = {}
+    buckets = {}
   }
 }

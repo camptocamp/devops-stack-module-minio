@@ -17,9 +17,9 @@ minio:
         hosts:
           - "${minio.domain}"
           - "minio.apps.${base_domain}"
-  %{ if length(minio.extra_buckets) > 0 }
+  %{ if length(minio.buckets) > 0 }
   buckets:
-  %{ for bucket in minio.extra_buckets }
+  %{ for bucket in minio.buckets }
     - name: bucket.name
       policy: none
       purge: false
