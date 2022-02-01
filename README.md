@@ -9,9 +9,7 @@ A [DevOps Stack](https://devops-stack.io) module to deploy and configure [MinIO]
 module "storage" {
   source = "git::https://github.com/camptocamp/devops-stack-module-minio.git//modules"
 
-  cluster_name     = var.cluster_name
-  argocd_namespace = module.cluster.argocd_namespace
-  base_domain      = module.cluster.base_domain
+  cluster_info     = module.cluster.info
   cluster_issuer   = "ca-issuer"
 
   minio = {
