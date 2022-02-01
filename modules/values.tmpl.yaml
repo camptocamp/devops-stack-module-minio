@@ -11,12 +11,12 @@ minio:
       kubernetes.io/ingress.allow-http: "false"
     hosts:
       - "${minio.domain}"
-      - "minio.apps.${base_domain}"
+      - "minio.apps.${cluster_info.base_domain}"
     tls:
       - secretName: minio-tls
         hosts:
           - "${minio.domain}"
-          - "minio.apps.${base_domain}"
+          - "minio.apps.${cluster_info.base_domain}"
   %{ if length(minio.buckets) > 0 }
   buckets:
   %{ for name, bucket in minio.buckets }
