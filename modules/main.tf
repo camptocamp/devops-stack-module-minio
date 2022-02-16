@@ -16,16 +16,16 @@ resource "argocd_project" "this" {
       "devops-stack.io/argocd_namespace" = var.argocd_namespace
     }
   }
- 
+
   spec {
     description  = "minio application project"
     source_repos = ["https://github.com/camptocamp/devops-stack-module-minio.git"]
- 
+
     destination {
       server    = "https://kubernetes.default.svc"
       namespace = var.namespace
     }
- 
+
     orphaned_resources {
       warn = true
     }
