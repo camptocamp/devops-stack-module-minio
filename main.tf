@@ -94,6 +94,7 @@ module "oidc" {
   }
 }
 
+# Keykloak provder with specifed access
 provider "keycloak" {
   client_id                = "admin-cli"
   username                 = module.oidc.admin_credentials.username
@@ -101,6 +102,20 @@ provider "keycloak" {
   url                      = "https://keycloak.apps.${local.cluster_name}.${format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))}"
   tls_insecure_skip_verify = true
 }
+
+# odic_bootstrap with its dependencies
+module "oidc_bootstrap" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak//oidc_bootstrap?ref=v1.0.2"
+
+  cluster_name   = local.cluster_name
+  base_domain    = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  cluster_issuer = local.cluster_issuer
+
+  dependency_ids = {
+    oidc = module.oidc.id
+  }
+}
+
 
 
 
