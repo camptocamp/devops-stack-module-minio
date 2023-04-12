@@ -1,7 +1,8 @@
 # In this file we call the modules of our use case of DevOps Stack.
 # locals are used to define comman variables for external use.
 locals {
-  cluster_name = "tpi"
+  cluster_name   = "tpi"
+  cluster_issuer = "ca-issuer"
 }
 
 # Module KinD with cluster name and version
@@ -76,6 +77,21 @@ module "cert-manager" {
   cluster_name     = local.cluster_name
   base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
+}
+
+# We use keycloak modules for user authentication for example to access ArgoCD, grafana and prometheus 
+module "oidc" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.2"
+
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  dependency_ids = {
+    traefik      = module.ingress.id
+    cert-manager = module.cert-manager.id
+  }
 }
 
 
