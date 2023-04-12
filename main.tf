@@ -160,6 +160,49 @@ module "prometheus-stack" {
 }
 
 
+# This module is used to ArgoCD as argocd resource application
+module "argocd" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git?ref=v1.0.0"
+
+  base_domain              = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  cluster_name             = local.cluster_name
+  cluster_issuer           = local.cluster_issuer
+  server_secretkey         = module.argocd_bootstrap.argocd_server_secretkey
+  accounts_pipeline_tokens = module.argocd_bootstrap.argocd_accounts_pipeline_tokens
+
+  oidc = {
+    name         = "OIDC"
+    issuer       = module.oidc_bootstrap.oidc.issuer_url
+    clientID     = module.oidc_bootstrap.oidc.client_id
+    clientSecret = module.oidc_bootstrap.oidc.client_secret
+    requestedIDTokenClaims = {
+      groups = {
+        essential = true
+      }
+    }
+  }
+
+  helm_values = [{
+    argo-cd = {
+      configs = {
+        rbac = {
+          "scopes"     = "[groups]"
+          "policy.csv" = <<-EOT
+            g, pipeline, role:admin
+            g, devops-stack-admins, role:admin
+          EOT
+        }
+      }
+    }
+  }]
+
+  dependency_ids = {
+    oidc                  = module.oidc_bootstrap.id
+    kube-prometheus-stack = module.prometheus-stack.id
+  }
+}
+
+
 
 
 
