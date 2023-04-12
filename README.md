@@ -1,0 +1,1 @@
+** This repository contains the devops stack modules with specific configuration depending of our use cases.
