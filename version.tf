@@ -6,5 +6,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 2"
     }
+    # We use this ArgoCD provider to deploy the remaining modules.
+    argocd = {
+      source  = "oboukili/argocd"
+      version = "~> 4"
+    }
   }
 }

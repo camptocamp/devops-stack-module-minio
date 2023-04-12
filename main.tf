@@ -34,3 +34,18 @@ module "argocd_bootstrap" {
   source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.0.0"
 }
 
+# Calling ArgoCD provider with required access to the cluster.
+provider "argocd" {
+  server_addr                 = "127.0.0.1:8080"
+  auth_token                  = module.argocd_bootstrap.argocd_auth_token
+  insecure                    = true
+  plain_text                  = true
+  port_forward                = true
+  port_forward_with_namespace = module.argocd_bootstrap.argocd_namespace
+  kubernetes {
+    host                   = module.kind.parsed_kubeconfig.host
+    client_certificate     = module.kind.parsed_kubeconfig.client_certificate
+    client_key             = module.kind.parsed_kubeconfig.client_key
+    cluster_ca_certificate = module.kind.parsed_kubeconfig.cluster_ca_certificate
+  }
+}
