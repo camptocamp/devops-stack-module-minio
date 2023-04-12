@@ -69,3 +69,13 @@ module "ingress" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
+# We use this module to manage cerificates for depoyed services inside the cluster
+module "cert-manager" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-cert-manager.git//self-signed?ref=v1.0.1"
+
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+}
+
+
