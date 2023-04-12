@@ -1,6 +1,7 @@
 ---
-name: "template"
-title: "Module Template"
+# This part will allow to publish the documentation of the module to DevOps Stack website.
+name: "MiniO"
+title: "Module MiniO"
 version: true
 start_page: README.adoc
 nav:

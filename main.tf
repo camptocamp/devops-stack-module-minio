@@ -1,10 +1,12 @@
+# Null resource is used to manage dependencies between modules.
 resource "null_resource" "dependencies" {
   triggers = var.dependency_ids
 }
 
+# argocd_project resource is used to create argocd project for minio module
 resource "argocd_project" "this" {
   metadata {
-    name      = "<CHART_NAME>"
+    name      = "minio"
     namespace = var.argocd_namespace
     annotations = {
       "devops-stack.io/argocd_namespace" = var.argocd_namespace
@@ -12,8 +14,8 @@ resource "argocd_project" "this" {
   }
 
   spec {
-    description  = "<CHART_NAME> application project"
-    source_repos = ["https://github.com/camptocamp/devops-stack-module-<CHART_NAME>.git"]
+    description  = "minio application project"
+    source_repos = ["https://github.com/camptocamp/devops-stack-module-minio.git"]
 
     destination {
       name      = "in-cluster"
@@ -31,13 +33,15 @@ resource "argocd_project" "this" {
   }
 }
 
+# This datasource is used to merge helm values from local file and variable and encode it before being passed to the ressource application.
 data "utils_deep_merge_yaml" "values" {
   input = [for i in concat(local.helm_values, var.helm_values) : yamlencode(i)]
 }
 
+# argocd_project resource is used to create argocd application for minio module
 resource "argocd_application" "this" {
   metadata {
-    name      = "<CHART_NAME>"
+    name      = "minio"
     namespace = var.argocd_namespace
   }
 
@@ -52,8 +56,8 @@ resource "argocd_application" "this" {
     project = argocd_project.this.metadata.0.name
 
     source {
-      repo_url        = "https://github.com/camptocamp/devops-stack-module-<CHART_NAME>.git"
-      path            = "charts/<CHART_NAME>"
+      repo_url        = "https://github.com/camptocamp/devops-stack-module-minio.git"
+      path            = "charts/minio"
       target_revision = var.target_revision
       helm {
         values = data.utils_deep_merge_yaml.values.output
