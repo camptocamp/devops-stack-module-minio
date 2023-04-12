@@ -49,3 +49,15 @@ provider "argocd" {
     cluster_ca_certificate = module.kind.parsed_kubeconfig.cluster_ca_certificate
   }
 }
+
+# We use Traefik that acts like ingress controler inside the cluster.
+module "ingress" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-traefik.git//kind?ref=v1.0.0"
+
+  cluster_name = local.cluster_name
+
+  base_domain = "something.com"
+
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+}
+
