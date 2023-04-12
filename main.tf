@@ -94,4 +94,13 @@ module "oidc" {
   }
 }
 
+provider "keycloak" {
+  client_id                = "admin-cli"
+  username                 = module.oidc.admin_credentials.username
+  password                 = module.oidc.admin_credentials.password
+  url                      = "https://keycloak.apps.${local.cluster_name}.${format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))}"
+  tls_insecure_skip_verify = true
+}
+
+
 
