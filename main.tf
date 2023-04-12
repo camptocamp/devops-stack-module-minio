@@ -28,3 +28,9 @@ module "metallb" {
 
   subnet = module.kind.kind_subnet
 }
+
+# This module is used to install ArgoCD using helm provider(helm-release chart)
+module "argocd_bootstrap" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-argocd.git//bootstrap?ref=v1.0.0"
+}
+
