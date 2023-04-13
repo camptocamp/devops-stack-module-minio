@@ -130,6 +130,14 @@ Default:
 }
 ----
 
+==== [[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
+
+Description: SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files.
+
+Type: `string`
+
+Default: `"ca-issuer"`
+
 ==== [[input_cluster_name]] <<input_cluster_name,cluster_name>>
 
 Description: Name given to the cluster. Value used for naming some the resources created by the module.
@@ -250,6 +258,12 @@ object({
 |`string`
 |n/a
 |yes
+
+|[[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
+|SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files.
+|`string`
+|`"ca-issuer"`
+|no
 
 |[[input_cluster_name]] <<input_cluster_name,cluster_name>>
 |Name given to the cluster. Value used for naming some the resources created by the module.
