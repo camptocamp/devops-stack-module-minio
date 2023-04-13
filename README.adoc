@@ -1,16 +1,16 @@
-= devops-stack-module-template
+= devops-stack-module-minio
 [NOTE]
 ====
 CAUTION: This Module is in developement process. PLEASE Do NOT use it in production environments.
 ====
 // Document attributes to replace along the document
 // Here you can define variables for something that keeps repeating along the text
-:chart-version: 1.2.3
-:original-repo-url: https://github.com/path/to/some/repository
+:chart-version: 5.0.7
+:original-repo-url: https://github.com/minio/minio/tree/master/helm/minio
 
-A https://devops-stack.io[DevOps Stack] module to deploy *_something_*.
+A https://devops-stack.io[DevOps Stack] module to deploy minio.
 
-The *_something_* chart used by this module is shipped in this repository as well, in order to avoid any unwanted behaviors caused by unsupported versions. 
+The minio chart used by this module is shipped in this repository as well, in order to avoid any unwanted behaviors caused by unsupported versions. 
 
 [cols="1,1,1",options="autowidth,header"]
 |===
@@ -26,8 +26,8 @@ _You can start by giving a simple example and then show some others with increas
 
 [source,terraform]
 ----
-module "template" {
-  source = "git::https://github.com/camptocamp/devops-stack-module-template.git?ref=<RELEASE>"
+module "minio" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio.git?ref=<RELEASE>"
 
   cluster_name            = local.cluster_name
   argocd_namespace        = local.argocd_namespace
