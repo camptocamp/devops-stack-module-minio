@@ -24,6 +24,12 @@ variable "target_revision" {
   default     = "v1.0.0" # x-release-please-version
 }
 
+variable "cluster_issuer" {
+  description = "SSL certificate issuer to use. Usually you would configure this value as `letsencrypt-staging` or `letsencrypt-prod` on your root `*.tf` files."
+  type        = string
+  default     = "ca-issuer"
+}
+
 variable "helm_values" {
   description = "Helm chart value overrides. They should be passed as a list of HCL structures."
   type        = any
