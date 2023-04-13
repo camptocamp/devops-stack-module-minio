@@ -8,6 +8,11 @@ variable "cluster_name" {
   default     = "cluster"
 }
 
+variable "base_domain" {
+  description = "Principal default domain"
+  type        = string
+}
+
 variable "argocd_namespace" {
   description = "Namespace used by Argo CD where the Application and AppProject resources should be created."
   type        = string
