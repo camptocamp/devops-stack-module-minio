@@ -79,6 +79,20 @@ module "cert-manager" {
   argocd_namespace = module.argocd_bootstrap.argocd_namespace
 }
 
+# calling minio module for testing purpose
+module "minio" {
+  source = "git::https://github.com/camptocamp/devops-stack-module-minio.git"
+
+  cluster_name     = local.cluster_name
+  base_domain      = format("%s.nip.io", replace(module.ingress.external_ip, ".", "-"))
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
+
+  dependency_ids = {
+    traefik      = module.ingress.id
+    cert-manager = module.cert-manager.id
+  }
+}
+
 # We use keycloak modules for user authentication for example to access ArgoCD, grafana, alertmanager and prometheus
 module "oidc" {
   source = "git::https://github.com/camptocamp/devops-stack-module-keycloak?ref=v1.0.2"
