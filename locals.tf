@@ -34,6 +34,8 @@ locals {
           ]
         }]
       }
+      rootUser     = "root"
+      rootPassword = "test"
     }
   }]
 }
