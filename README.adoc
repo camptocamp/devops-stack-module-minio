@@ -96,6 +96,12 @@ Description: Namespace used by Argo CD where the Application and AppProject reso
 
 Type: `string`
 
+==== [[input_base_domain]] <<input_base_domain,base_domain>>
+
+Description: Principal default domain
+
+Type: `string`
+
 === Optional Inputs
 
 The following input variables are optional (have default values):
@@ -235,6 +241,12 @@ object({
 
 |[[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
 |Namespace used by Argo CD where the Application and AppProject resources should be created.
+|`string`
+|n/a
+|yes
+
+|[[input_base_domain]] <<input_base_domain,base_domain>>
+|Principal default domain
 |`string`
 |n/a
 |yes
