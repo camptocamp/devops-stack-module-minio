@@ -65,3 +65,29 @@ variable "dependency_ids" {
 #######################
 ## Module variables
 #######################
+# this variable is used to create polocies, users and buckets instead of hard coded values.
+variable "config_minio" {
+  type = object({
+    policies = optional(list(object({
+      name = string
+      statements = list(object({
+        resources = list(string)
+        actions   = list(string)
+      }))
+    })), [])
+    users = optional(list(object({
+      accessKey = string
+      secretKey = string
+      policy    = string
+    })), [])
+    buckets = optional(list(object({
+      name          = string
+      policy        = optional(string, "none")
+      purge         = optional(bool, false)
+      versioning    = optional(bool, false)
+      objectlocking = optional(bool, false)
+    })), [])
+  })
+
+  default = {}
+}
