@@ -3,6 +3,11 @@ resource "null_resource" "dependencies" {
   triggers = var.dependency_ids
 }
 
+# random password for root minio console
+resource "random_password" "minio_root_secretkey" {
+  length  = 16
+  special = false
+}
 # argocd_project resource is used to create argocd project for minio module
 resource "argocd_project" "this" {
   metadata {
