@@ -149,6 +149,38 @@ Type: `string`
 
 Default: `"cluster"`
 
+==== [[input_config_minio]] <<input_config_minio,config_minio>>
+
+Description: ###################### # Module variables ###################### this variable is used to create polocies, users and buckets instead of hard coded values.
+
+Type:
+[source,hcl]
+----
+object({
+    policies = optional(list(object({
+      name = string
+      statements = list(object({
+        resources = list(string)
+        actions   = list(string)
+      }))
+    })), [])
+    users = optional(list(object({
+      accessKey = string
+      secretKey = string
+      policy    = string
+    })), [])
+    buckets = optional(list(object({
+      name          = string
+      policy        = optional(string, "none")
+      purge         = optional(bool, false)
+      versioning    = optional(bool, false)
+      objectlocking = optional(bool, false)
+    })), [])
+  })
+----
+
+Default: `{}`
+
 ==== [[input_dependency_ids]] <<input_dependency_ids,dependency_ids>>
 
 Description: IDs of the other modules on which this module depends on.
@@ -189,9 +221,9 @@ The following outputs are exported:
 
 Description: ID to pass other modules in order to refer to this module as a dependency.
 
-==== [[output_minio_root_secretkey]] <<output_minio_root_secretkey,minio_root_secretkey>>
+==== [[output_minio_root_user_credentials]] <<output_minio_root_user_credentials,minio_root_user_credentials>>
 
-Description: Minio RootUser
+Description: n/a
 // END_TF_DOCS
 
 === Reference in table format 
@@ -288,6 +320,38 @@ object({
 |`"cluster"`
 |no
 
+|[[input_config_minio]] <<input_config_minio,config_minio>>
+|###################### # Module variables ###################### this variable is used to create polocies, users and buckets instead of hard coded values.
+|
+
+[source]
+----
+object({
+    policies = optional(list(object({
+      name = string
+      statements = list(object({
+        resources = list(string)
+        actions   = list(string)
+      }))
+    })), [])
+    users = optional(list(object({
+      accessKey = string
+      secretKey = string
+      policy    = string
+    })), [])
+    buckets = optional(list(object({
+      name          = string
+      policy        = optional(string, "none")
+      purge         = optional(bool, false)
+      versioning    = optional(bool, false)
+      objectlocking = optional(bool, false)
+    })), [])
+  })
+----
+
+|`{}`
+|no
+
 |[[input_dependency_ids]] <<input_dependency_ids,dependency_ids>>
 |IDs of the other modules on which this module depends on.
 |`map(string)`
@@ -320,7 +384,7 @@ object({
 |===
 |Name |Description
 |[[output_id]] <<output_id,id>> |ID to pass other modules in order to refer to this module as a dependency.
-|[[output_minio_root_secretkey]] <<output_minio_root_secretkey,minio_root_secretkey>> |Minio RootUser
+|[[output_minio_root_user_credentials]] <<output_minio_root_user_credentials,minio_root_user_credentials>> |n/a
 |===
 // END_TF_TABLES
 ====
