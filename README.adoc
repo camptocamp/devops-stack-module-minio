@@ -74,6 +74,8 @@ The following providers are used by this module:
 
 - [[provider_null]] <<provider_null,null>>
 
+- [[provider_random]] <<provider_random,random>>
+
 - [[provider_utils]] <<provider_utils,utils>> (>= 1)
 
 === Resources
@@ -84,6 +86,7 @@ The following resources are used by this module:
 - https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project[argocd_project.this] (resource)
 - https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.dependencies] (resource)
 - https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.this] (resource)
+- https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.minio_root_secretkey] (resource)
 - https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml[utils_deep_merge_yaml.values] (data source)
 
 === Required Inputs
@@ -185,6 +188,10 @@ The following outputs are exported:
 ==== [[output_id]] <<output_id,id>>
 
 Description: ID to pass other modules in order to refer to this module as a dependency.
+
+==== [[output_minio_root_secretkey]] <<output_minio_root_secretkey,minio_root_secretkey>>
+
+Description: Minio RootUser
 // END_TF_DOCS
 
 === Reference in table format 
@@ -209,6 +216,7 @@ Description: ID to pass other modules in order to refer to this module as a depe
 |Name |Version
 |[[provider_argocd]] <<provider_argocd,argocd>> |>= 4
 |[[provider_null]] <<provider_null,null>> |n/a
+|[[provider_random]] <<provider_random,random>> |n/a
 |[[provider_utils]] <<provider_utils,utils>> |>= 1
 |===
 
@@ -221,6 +229,7 @@ Description: ID to pass other modules in order to refer to this module as a depe
 |https://registry.terraform.io/providers/oboukili/argocd/latest/docs/resources/project[argocd_project.this] |resource
 |https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.dependencies] |resource
 |https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource[null_resource.this] |resource
+|https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/password[random_password.minio_root_secretkey] |resource
 |https://registry.terraform.io/providers/cloudposse/utils/latest/docs/data-sources/deep_merge_yaml[utils_deep_merge_yaml.values] |data source
 |===
 
@@ -311,6 +320,7 @@ object({
 |===
 |Name |Description
 |[[output_id]] <<output_id,id>> |ID to pass other modules in order to refer to this module as a dependency.
+|[[output_minio_root_secretkey]] <<output_minio_root_secretkey,minio_root_secretkey>> |Minio RootUser
 |===
 // END_TF_TABLES
 ====

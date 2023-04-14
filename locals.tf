@@ -35,7 +35,7 @@ locals {
         }]
       }
       rootUser     = "root"
-      rootPassword = "test"
+      rootPassword = random_password.minio_root_secretkey.result
     }
   }]
 }
