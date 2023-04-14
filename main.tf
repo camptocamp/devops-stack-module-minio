@@ -19,7 +19,7 @@ resource "argocd_project" "this" {
 
     destination {
       name      = "in-cluster"
-      namespace = "kube-system"
+      namespace = var.namespace
     }
 
     orphaned_resources {
@@ -66,7 +66,7 @@ resource "argocd_application" "this" {
 
     destination {
       name      = "in-cluster"
-      namespace = "kube-system"
+      namespace = var.namespace
     }
 
     sync_policy {
