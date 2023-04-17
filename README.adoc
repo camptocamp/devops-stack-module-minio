@@ -217,6 +217,10 @@ Default: `"v1.0.0"`
 
 The following outputs are exported:
 
+==== [[output_endpoint]] <<output_endpoint,endpoint>>
+
+Description: MinIO endpoint for where the buckets are available.
+
 ==== [[output_id]] <<output_id,id>>
 
 Description: ID to pass other modules in order to refer to this module as a dependency.
@@ -383,6 +387,7 @@ object({
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Description
+|[[output_endpoint]] <<output_endpoint,endpoint>> |MinIO endpoint for where the buckets are available.
 |[[output_id]] <<output_id,id>> |ID to pass other modules in order to refer to this module as a dependency.
 |[[output_minio_root_user_credentials]] <<output_minio_root_user_credentials,minio_root_user_credentials>> |n/a
 |===
