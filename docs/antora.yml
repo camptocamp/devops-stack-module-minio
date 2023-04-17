@@ -1,4 +1,4 @@
-# This part will allow to publish the documentation of the module to DevOps Stack website.
+---
 name: "minio"
 title: "MinIO Module"
 version: true
