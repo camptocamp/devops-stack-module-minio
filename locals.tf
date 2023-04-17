@@ -37,9 +37,9 @@ locals {
       rootUser     = "root"
       rootPassword = random_password.minio_root_secretkey.result
       # call created config_minio variable to use it the chart 
-      users        = var.config_minio.users
-      buckets      = var.config_minio.buckets
-      policies     = var.config_minio.policies
+      users    = var.config_minio.users
+      buckets  = var.config_minio.buckets
+      policies = var.config_minio.policies
     }
   }]
 }
