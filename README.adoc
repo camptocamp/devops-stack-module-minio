@@ -15,7 +15,7 @@ The minio chart used by this module is shipped in this repository as well, in or
 [cols="1,1,1",options="autowidth,header"]
 |===
 |Current Chart Version |Original Repository |Default Values
-|*{chart-version}* |{original-repo-url}/subpath/to/the/chart[Chart] |{original-repo-url}//subpath/to/the/values.yaml[`values.yaml`]
+|*{chart-version}* |{original-repo-url}[Chart] |{original-repo-url}//values.yaml[`values.yaml`]
 |===
 
 == Usage
