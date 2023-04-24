@@ -1,8 +1,4 @@
 = devops-stack-module-minio
-[NOTE]
-====
-CAUTION: This Module is in developement process. PLEASE Do NOT use it in production environments.
-====
 // Document attributes to replace along the document
 // Here you can define variables for something that keeps repeating along the text
 :chart-version: 5.0.7
