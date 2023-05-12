@@ -4,10 +4,12 @@ output "id" {
 }
 
 output "endpoint" {
-  description = "MinIO endpoint for where the buckets are available."
+  description = "MinIO endpoint where the buckets are available."
   value       = "minio.${var.namespace}:9000"
 }
+
 output "minio_root_user_credentials" {
-  value     = random_password.minio_root_secretkey
-  sensitive = true
+  description = "The MinIO root user password."
+  value       = random_password.minio_root_secretkey
+  sensitive   = true
 }

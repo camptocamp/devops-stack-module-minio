@@ -1,14 +1,12 @@
-# Null resource is used to manage dependencies between modules.
 resource "null_resource" "dependencies" {
   triggers = var.dependency_ids
 }
 
-# random password for root minio console
 resource "random_password" "minio_root_secretkey" {
   length  = 16
   special = false
 }
-# argocd_project resource is used to create argocd project for minio module
+
 resource "argocd_project" "this" {
   metadata {
     name      = "minio"
@@ -38,12 +36,10 @@ resource "argocd_project" "this" {
   }
 }
 
-# This datasource is used to merge helm values from local file and variable and encode it before being passed to the ressource application.
 data "utils_deep_merge_yaml" "values" {
   input = [for i in concat(local.helm_values, var.helm_values) : yamlencode(i)]
 }
 
-# argocd_project resource is used to create argocd application for minio module
 resource "argocd_application" "this" {
   metadata {
     name      = "minio"

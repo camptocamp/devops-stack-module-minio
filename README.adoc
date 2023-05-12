@@ -1,20 +1,21 @@
 = devops-stack-module-minio
 // Document attributes to replace along the document
-// Here you can define variables for something that keeps repeating along the text
-:chart-version: 5.0.7
+:chart-version: 5.0.9
 :original-repo-url: https://github.com/minio/minio/tree/master/helm/minio
 
-A https://devops-stack.io[DevOps Stack] module to deploy minio.
+A https://devops-stack.io[DevOps Stack] module to deploy [MinIO](https://min.io/).
 
-The minio chart used by this module is shipped in this repository as well, in order to avoid any unwanted behaviors caused by unsupported versions. 
+The MinIO chart used by this module is shipped in this repository as well, in order to avoid any unwanted behaviors caused by unsupported versions. 
 
 [cols="1,1,1",options="autowidth,header"]
 |===
 |Current Chart Version |Original Repository |Default Values
-|*{chart-version}* |{original-repo-url}[Chart] |{original-repo-url}//values.yaml[`values.yaml`]
+|*{chart-version}* |{original-repo-url}[Chart] |https://artifacthub.io/packages/helm/minio-official/minio?modal=values[`values.yaml`]
 |===
 
 == Usage
+
+This module can be declared by adding the following block on your Terraform configuration:
 
 [source,terraform]
 ----
@@ -24,12 +25,84 @@ module "minio" {
   cluster_name            = local.cluster_name
   argocd_namespace        = local.argocd_namespace
 
-  # TODO Consider replacing this depends_on by our dependency_ids
-  depends_on = [
-    module.argocd_bootstrap,
-  ]
+  enable_service_monitor = false # Needs to be false for the first deployment
+
+  config_minio = local.minio_config
+
+  dependency_ids = {
+    argocd = module.argocd_bootstrap.id
+  }
 }
 ----
+
+The `config_minio` variable is where you create the necessary policies, users and buckets. In this example, we defined them inside a Terraform local variable:
+
+[source,terraform]
+----
+resource "random_password" "loki_secretkey" {
+  length  = 32
+  special = false
+}
+resource "random_password" "thanos_secretkey" {
+  length  = 32
+  special = false
+}
+
+locals {
+  minio_config = {
+    policies = [
+      {
+        name = "loki-policy"
+        statements = [
+          {
+            resources = ["arn:aws:s3:::loki-bucket"]
+            actions   = ["s3:CreateBucket", "s3:DeleteBucket", "s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads"]
+          },
+          {
+            resources = ["arn:aws:s3:::loki-bucket/*"]
+            actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+          }
+        ]
+      },
+      {
+        name = "thanos-policy"
+        statements = [
+          {
+            resources = ["arn:aws:s3:::thanos-bucket"]
+            actions   = ["s3:CreateBucket", "s3:DeleteBucket", "s3:GetBucketLocation", "s3:ListBucket", "s3:ListBucketMultipartUploads"]
+          },
+          {
+            resources = ["arn:aws:s3:::thanos-bucket/*"]
+            actions   = ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"]
+          }
+        ]
+      }
+    ],
+    users = [
+      {
+        accessKey = "loki-user"
+        secretKey = random_password.loki_secretkey.result
+        policy    = "loki-policy"
+      },
+      {
+        accessKey = "thanos-user"
+        secretKey = random_password.thanos_secretkey.result
+        policy    = "thanos-policy"
+      }
+    ],
+    buckets = [
+      {
+        name = "loki-bucket"
+      },
+      {
+        name = "thanos-bucket"
+      }
+    ]
+  }
+}
+----
+
+TIP: Check the KinD deployment xref:ROOT:tutorials/deploy_kind.adoc[tutorial] and https://github.com/camptocamp/devops-stack/tree/main/examples/kind[example] to get a better idea of how these buckets are configured and used.
 
 === Dependencies
 
