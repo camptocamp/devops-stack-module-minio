@@ -34,6 +34,11 @@ locals {
           ]
         }]
       }
+      metrics = {
+        serviceMonitor = {
+          enabled = var.enable_service_monitor
+        }
+      }
       rootUser     = "root"
       rootPassword = random_password.minio_root_secretkey.result
       # call created config_minio variable to use it the chart 

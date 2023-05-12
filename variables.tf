@@ -36,6 +36,12 @@ variable "namespace" {
   default     = "minio"
 }
 
+variable "enable_service_monitor" {
+  description = "Enable Prometheus ServiceMonitor in the Helm chart."
+  type        = bool
+  default     = true
+}
+
 variable "helm_values" {
   description = "Helm chart value overrides. They should be passed as a list of HCL structures."
   type        = any
@@ -65,7 +71,8 @@ variable "dependency_ids" {
 #######################
 ## Module variables
 #######################
-# this variable is used to create polocies, users and buckets instead of hard coded values.
+
+# This variable is used to create polocies, users and buckets instead of hard coded values.
 variable "config_minio" {
   type = object({
     policies = optional(list(object({
