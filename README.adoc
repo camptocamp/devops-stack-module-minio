@@ -22,12 +22,16 @@ This module can be declared by adding the following block on your Terraform conf
 module "minio" {
   source = "git::https://github.com/camptocamp/devops-stack-module-minio.git?ref=<RELEASE>"
 
-  cluster_name            = local.cluster_name
-  argocd_namespace        = local.argocd_namespace
+  cluster_name     = local.cluster_name
+  base_domain      = local.base_domain
+  cluster_issuer   = local.cluster_issuer
+  argocd_namespace = module.argocd_bootstrap.argocd_namespace
 
   enable_service_monitor = false # Needs to be false for the first deployment
 
   config_minio = local.minio_config
+
+  oidc = module.oidc.oidc
 
   dependency_ids = {
     argocd = module.argocd_bootstrap.id
@@ -104,11 +108,25 @@ locals {
 
 TIP: Check the KinD deployment xref:ROOT:tutorials/deploy_kind.adoc[tutorial] and https://github.com/camptocamp/devops-stack/tree/main/examples/kind[example] to get a better idea of how these buckets are configured and used.
 
+=== WebUI Login
+
+This module is configured to used OIDC out-of-the-box, as long as the proper scope is passed. You can check the https://min.io/docs/minio/linux/operations/external-iam/configure-keycloak-identity-management.html[official documentation] page to get more information about the way this is configured.
+
+However, there is no way to configure the OIDC login as default on the login page, so take note that in order to use the OIDC login you need to click on _Other Authentication Methods_ then _Login using SSO (_)_, as shown in the screenshot below.
+
+image::login_page.png[MinIO Login Page]
+
+== Technical Reference
+
 === Dependencies
 
-==== `module.argocd_bootstrap`
+==== `module.traefik` and `module.cert-manager`
 
-This module must be one of the first ones to be deployed and consequently it needs to be deployed after the module `argocd_bootstrap`.
+In order to have a working ingress to be able to access the web interface.
+
+==== `module.oidc`
+
+In order to have the ability to login using OIDC.
 
 // BEGIN_TF_DOCS
 === Requirements
@@ -194,6 +212,14 @@ Type: `string`
 
 Default: `"minio"`
 
+==== [[input_enable_service_monitor]] <<input_enable_service_monitor,enable_service_monitor>>
+
+Description: Enable Prometheus ServiceMonitor in the Helm chart.
+
+Type: `bool`
+
+Default: `true`
+
 ==== [[input_helm_values]] <<input_helm_values,helm_values>>
 
 Description: Helm chart value overrides. They should be passed as a list of HCL structures.
@@ -236,7 +262,7 @@ Default: `{}`
 
 ==== [[input_config_minio]] <<input_config_minio,config_minio>>
 
-Description: ###################### # Module variables ###################### this variable is used to create polocies, users and buckets instead of hard coded values.
+Description: Variable to create buckets and required users and policies.
 
 Type:
 [source,hcl]
@@ -266,6 +292,26 @@ object({
 
 Default: `{}`
 
+==== [[input_oidc]] <<input_oidc,oidc>>
+
+Description: OIDC configuration to access the MinIO web interface.
+
+Type:
+[source,hcl]
+----
+object({
+    issuer_url              = optional(string, "")
+    oauth_url               = optional(string, "")
+    token_url               = optional(string, "")
+    api_url                 = optional(string, "")
+    client_id               = optional(string, "")
+    client_secret           = optional(string, "")
+    oauth2_proxy_extra_args = optional(list(string), [])
+  })
+----
+
+Default: `{}`
+
 === Outputs
 
 The following outputs are exported:
@@ -276,11 +322,11 @@ Description: ID to pass other modules in order to refer to this module as a depe
 
 ==== [[output_endpoint]] <<output_endpoint,endpoint>>
 
-Description: MinIO endpoint for where the buckets are available.
+Description: MinIO endpoint where the buckets are available.
 
 ==== [[output_minio_root_user_credentials]] <<output_minio_root_user_credentials,minio_root_user_credentials>>
 
-Description: n/a
+Description: The MinIO root user password.
 // END_TF_DOCS
 
 === Reference in table format 
@@ -363,6 +409,12 @@ Description: n/a
 |`"minio"`
 |no
 
+|[[input_enable_service_monitor]] <<input_enable_service_monitor,enable_service_monitor>>
+|Enable Prometheus ServiceMonitor in the Helm chart.
+|`bool`
+|`true`
+|no
+
 |[[input_helm_values]] <<input_helm_values,helm_values>>
 |Helm chart value overrides. They should be passed as a list of HCL structures.
 |`any`
@@ -402,7 +454,7 @@ object({
 |no
 
 |[[input_config_minio]] <<input_config_minio,config_minio>>
-|###################### # Module variables ###################### this variable is used to create polocies, users and buckets instead of hard coded values.
+|Variable to create buckets and required users and policies.
 |
 
 [source]
@@ -433,6 +485,26 @@ object({
 |`{}`
 |no
 
+|[[input_oidc]] <<input_oidc,oidc>>
+|OIDC configuration to access the MinIO web interface.
+|
+
+[source]
+----
+object({
+    issuer_url              = optional(string, "")
+    oauth_url               = optional(string, "")
+    token_url               = optional(string, "")
+    api_url                 = optional(string, "")
+    client_id               = optional(string, "")
+    client_secret           = optional(string, "")
+    oauth2_proxy_extra_args = optional(list(string), [])
+  })
+----
+
+|`{}`
+|no
+
 |===
 
 = Outputs
@@ -441,8 +513,8 @@ object({
 |===
 |Name |Description
 |[[output_id]] <<output_id,id>> |ID to pass other modules in order to refer to this module as a dependency.
-|[[output_endpoint]] <<output_endpoint,endpoint>> |MinIO endpoint for where the buckets are available.
-|[[output_minio_root_user_credentials]] <<output_minio_root_user_credentials,minio_root_user_credentials>> |n/a
+|[[output_endpoint]] <<output_endpoint,endpoint>> |MinIO endpoint where the buckets are available.
+|[[output_minio_root_user_credentials]] <<output_minio_root_user_credentials,minio_root_user_credentials>> |The MinIO root user password.
 |===
 // END_TF_TABLES
 ====

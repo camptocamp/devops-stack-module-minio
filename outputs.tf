@@ -10,6 +10,9 @@ output "endpoint" {
 
 output "minio_root_user_credentials" {
   description = "The MinIO root user password."
-  value       = random_password.minio_root_secretkey
-  sensitive   = true
+  value = {
+    username = "root"
+    password = random_password.minio_root_secretkey.result
+  }
+  sensitive = true
 }
