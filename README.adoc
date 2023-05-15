@@ -3,7 +3,7 @@
 :chart-version: 5.0.9
 :original-repo-url: https://github.com/minio/minio/tree/master/helm/minio
 
-A https://devops-stack.io[DevOps Stack] module to deploy [MinIO](https://min.io/).
+A https://devops-stack.io[DevOps Stack] module to deploy https://min.io/[MinIO].
 
 The MinIO chart used by this module is shipped in this repository as well, in order to avoid any unwanted behaviors caused by unsupported versions. 
 
