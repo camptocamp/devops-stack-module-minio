@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.1.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.0.0...v1.1.0) (2023-05-15)
+
+
+### Features
+
+* **metrics:** add flag to enable ServiceMonitor ([4f34387](https://github.com/camptocamp/devops-stack-module-minio/commit/4f34387cc890fe49ec10a257edbb8e1eff1a075b))
+* **oidc:** add oidc configuration to the helm_values local ([83f46d5](https://github.com/camptocamp/devops-stack-module-minio/commit/83f46d576c619519cfe87fa8fa4e0ccb40421e75))
+* update chart to v5.0.9 ([6549c75](https://github.com/camptocamp/devops-stack-module-minio/commit/6549c751834afaab5e7009d72298709070b95970))
+
 ## 1.0.0 (2023-04-24)
 
 
