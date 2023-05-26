@@ -17,7 +17,7 @@ resource "argocd_project" "this" {
   }
 
   spec {
-    description  = "minio application project"
+    description  = "MinIO application project"
     source_repos = ["https://github.com/camptocamp/devops-stack-module-minio.git"]
 
     destination {
