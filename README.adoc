@@ -135,19 +135,23 @@ The following requirements are needed by this module:
 
 - [[requirement_argocd]] <<requirement_argocd,argocd>> (>= 4)
 
+- [[requirement_null]] <<requirement_null,null>> (>= 3)
+
+- [[requirement_random]] <<requirement_random,random>> (>= 3)
+
 - [[requirement_utils]] <<requirement_utils,utils>> (>= 1)
 
 === Providers
 
 The following providers are used by this module:
 
-- [[provider_null]] <<provider_null,null>>
-
-- [[provider_random]] <<provider_random,random>>
+- [[provider_random]] <<provider_random,random>> (>= 3)
 
 - [[provider_utils]] <<provider_utils,utils>> (>= 1)
 
 - [[provider_argocd]] <<provider_argocd,argocd>> (>= 4)
+
+- [[provider_null]] <<provider_null,null>> (>= 3)
 
 === Resources
 
@@ -164,15 +168,15 @@ The following resources are used by this module:
 
 The following input variables are required:
 
-==== [[input_base_domain]] <<input_base_domain,base_domain>>
+==== [[input_cluster_name]] <<input_cluster_name,cluster_name>>
 
-Description: Principal default domain
+Description: Name given to the cluster. Value used for naming some the resources created by the module.
 
 Type: `string`
 
-==== [[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
+==== [[input_base_domain]] <<input_base_domain,base_domain>>
 
-Description: Namespace used by Argo CD where the Application and AppProject resources should be created.
+Description: Base domain of the cluster. Value used for the ingress' URL of the application.
 
 Type: `string`
 
@@ -180,13 +184,13 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
-==== [[input_cluster_name]] <<input_cluster_name,cluster_name>>
+==== [[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
 
-Description: Name given to the cluster. Value used for naming some the resources created by the module.
+Description: Namespace used by Argo CD where the Application and AppProject resources should be created.
 
 Type: `string`
 
-Default: `"cluster"`
+Default: `"argocd"`
 
 ==== [[input_target_revision]] <<input_target_revision,target_revision>>
 
@@ -341,6 +345,8 @@ Description: The MinIO root user password.
 |===
 |Name |Version
 |[[requirement_argocd]] <<requirement_argocd,argocd>> |>= 4
+|[[requirement_null]] <<requirement_null,null>> |>= 3
+|[[requirement_random]] <<requirement_random,random>> |>= 3
 |[[requirement_utils]] <<requirement_utils,utils>> |>= 1
 |===
 
@@ -349,10 +355,10 @@ Description: The MinIO root user password.
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_null]] <<provider_null,null>> |n/a
-|[[provider_random]] <<provider_random,random>> |n/a
+|[[provider_random]] <<provider_random,random>> |>= 3
 |[[provider_utils]] <<provider_utils,utils>> |>= 1
 |[[provider_argocd]] <<provider_argocd,argocd>> |>= 4
+|[[provider_null]] <<provider_null,null>> |>= 3
 |===
 
 = Resources
@@ -376,11 +382,11 @@ Description: The MinIO root user password.
 |[[input_cluster_name]] <<input_cluster_name,cluster_name>>
 |Name given to the cluster. Value used for naming some the resources created by the module.
 |`string`
-|`"cluster"`
-|no
+|n/a
+|yes
 
 |[[input_base_domain]] <<input_base_domain,base_domain>>
-|Principal default domain
+|Base domain of the cluster. Value used for the ingress' URL of the application.
 |`string`
 |n/a
 |yes
@@ -388,8 +394,8 @@ Description: The MinIO root user password.
 |[[input_argocd_namespace]] <<input_argocd_namespace,argocd_namespace>>
 |Namespace used by Argo CD where the Application and AppProject resources should be created.
 |`string`
-|n/a
-|yes
+|`"argocd"`
+|no
 
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |Override of target revision of the application chart.
