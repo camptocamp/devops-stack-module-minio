@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.1](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.1.0...v1.1.1) (2023-05-30)
+
+
+### Bug Fixes
+
+* add default argocd_namespace ([4bad9f5](https://github.com/camptocamp/devops-stack-module-minio/commit/4bad9f54a291af5b2e62321e372e6b9c8798c990))
+* add missing providers ([af38d7b](https://github.com/camptocamp/devops-stack-module-minio/commit/af38d7bef3d86ed103c9e5aa8913d6bd09095459))
+
 ## [1.1.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.0.0...v1.1.0) (2023-05-15)
 
 
