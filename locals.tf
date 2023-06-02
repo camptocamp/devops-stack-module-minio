@@ -1,6 +1,6 @@
 locals {
-  domain                   = format("minio.apps.%s", var.base_domain)
-  domain_with_cluster_name = format("minio.apps.%s.%s", var.cluster_name, var.base_domain)
+  domain      = format("minio.apps.%s", var.base_domain)
+  domain_full = format("minio.apps.%s.%s", var.cluster_name, var.base_domain)
 
   self_signed_cert_enabled = var.cluster_issuer == "ca-issuer" || var.cluster_issuer == "letsencrypt-staging"
 
@@ -8,8 +8,8 @@ locals {
     extraVolumeMounts = [
       {
         name      = "certificate"
-        mountPath = "/etc/ssl/certs/ca.crt"
-        subPath   = "ca.crt"
+        mountPath = format("/etc/ssl/certs/%s", var.cluster_issuer == "letsencrypt-staging" ? "tls.crt" : "ca.crt")
+        subPath   = var.cluster_issuer == "letsencrypt-staging" ? "tls.crt" : "ca.crt"
       },
     ]
     extraVolumes = [
@@ -31,7 +31,7 @@ locals {
         clientSecret = var.oidc.client_secret
         claimName    = "policy"
         scopes       = "openid,profile,email"
-        redirectUri  = format("https://%s/oauth_callback", local.domain_with_cluster_name)
+        redirectUri  = format("https://%s/oauth_callback", local.domain_full)
         claimPrefix  = ""
         comment      = ""
       }
@@ -59,14 +59,14 @@ locals {
             "kubernetes.io/ingress.allow-http"                 = "false"
           }
           hosts = [
-            "minio.apps.${var.base_domain}",
-            "minio.apps.${var.cluster_name}.${var.base_domain}",
+            local.domain,
+            local.domain_full,
           ]
           tls = [{
             secretName = "minio-tls"
             hosts = [
-              "minio.apps.${var.base_domain}",
-              "minio.apps.${var.cluster_name}.${var.base_domain}",
+              local.domain,
+              local.domain_full,
             ]
           }]
         }
