@@ -1,4 +1,7 @@
 locals {
+  domain                   = format("minio.apps.%s", var.base_domain)
+  domain_with_cluster_name = format("minio.apps.%s.%s", var.cluster_name, var.base_domain)
+
   self_signed_cert_enabled = var.cluster_issuer == "ca-issuer" || var.cluster_issuer == "letsencrypt-staging"
 
   self_signed_cert = {
@@ -19,22 +22,22 @@ locals {
     ]
   }
 
-  oidc_config = merge(
+  oidc_config = var.oidc != null ? merge(
     {
       oidc = {
-        enabled      = var.oidc.issuer_url != "" && var.oidc.client_id != "" && var.oidc.client_secret != ""
+        enabled      = true
         configUrl    = "${var.oidc.issuer_url}/.well-known/openid-configuration"
         clientId     = var.oidc.client_id
         clientSecret = var.oidc.client_secret
         claimName    = "policy"
         scopes       = "openid,profile,email"
-        redirectUri  = "https://minio.apps.${var.cluster_name}.${var.base_domain}/oauth_callback"
+        redirectUri  = format("https://%s/oauth_callback", local.domain_with_cluster_name)
         claimPrefix  = ""
         comment      = ""
       }
     },
     local.self_signed_cert_enabled ? local.self_signed_cert : null
-  )
+  ) : null
 
   helm_values = [{
     minio = merge(
@@ -78,7 +81,7 @@ locals {
         buckets      = var.config_minio.buckets
         policies     = var.config_minio.policies
       },
-      local.oidc_config.oidc.enabled ? local.oidc_config : null
+      local.oidc_config != null ? local.oidc_config : null
     )
   }]
 }

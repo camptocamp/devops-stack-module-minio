@@ -105,14 +105,14 @@ variable "oidc" {
   description = "OIDC configuration to access the MinIO web interface."
 
   type = object({
-    issuer_url              = optional(string, "")
-    oauth_url               = optional(string, "")
-    token_url               = optional(string, "")
-    api_url                 = optional(string, "")
-    client_id               = optional(string, "")
-    client_secret           = optional(string, "")
+    issuer_url              = string
+    oauth_url               = string
+    token_url               = string
+    api_url                 = string
+    client_id               = string
+    client_secret           = string
     oauth2_proxy_extra_args = optional(list(string), [])
   })
 
-  default = {}
+  default = null
 }
