@@ -106,7 +106,7 @@ locals {
 }
 ----
 
-TIP: Check the KinD deployment xref:ROOT:tutorials/deploy_kind.adoc[tutorial] and https://github.com/camptocamp/devops-stack/tree/main/examples/kind[example] to get a better idea of how these buckets are configured and used.
+TIP: Check the KinD deployment xref:ROOT:ROOT:tutorials/deploy_kind.adoc[tutorial] and https://github.com/camptocamp/devops-stack/tree/main/examples/kind[example] to get a better idea of how these buckets are configured and used.
 
 === WebUI Login
 
