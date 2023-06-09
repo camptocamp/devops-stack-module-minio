@@ -81,7 +81,7 @@ locals {
         buckets      = var.config_minio.buckets
         policies     = var.config_minio.policies
       },
-      local.oidc_config != null ? local.oidc_config : null
+      local.oidc_config
     )
   }]
 }
