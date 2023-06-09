@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.2](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.1.1...v1.1.2) (2023-06-09)
+
+
+### Bug Fixes
+
+* fix the secret when using letsencrypt-staging ([ffbb35e](https://github.com/camptocamp/devops-stack-module-minio/commit/ffbb35e26d88e289b7de018390780b11b0e2011d))
+* remove the need for the optional by using null ([cf8e4bf](https://github.com/camptocamp/devops-stack-module-minio/commit/cf8e4bfbd2b1577e29d63b53fe04438c263989da))
+
 ## [1.1.1](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.1.0...v1.1.1) (2023-05-30)
 
 
