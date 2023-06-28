@@ -1,0 +1,15 @@
+---
+name: Upgrade Helm Chart
+
+on:
+  schedule:
+    - cron: "0 13 * * *"
+
+jobs:
+  upgrade-helm-chart:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Use Chart Bumper Action
+        uses: camptocamp/devops-stack/.github/workflows/auto-upgrade-helmchart.yaml@main
+        with:
+          token: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
