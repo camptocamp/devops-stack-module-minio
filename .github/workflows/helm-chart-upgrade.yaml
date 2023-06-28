@@ -12,4 +12,4 @@ jobs:
       - name: Use Chart Bumper Action
         uses: camptocamp/devops-stack/.github/workflows/auto-upgrade-helmchart.yaml@main
         with:
-          token: ${{ secrets.PROJECT_APP_PRIVATE_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
