@@ -133,7 +133,7 @@ In order to have the ability to login using OIDC.
 
 The following requirements are needed by this module:
 
-- [[requirement_argocd]] <<requirement_argocd,argocd>> (>= 4)
+- [[requirement_argocd]] <<requirement_argocd,argocd>> (>= 5)
 
 - [[requirement_null]] <<requirement_null,null>> (>= 3)
 
@@ -151,7 +151,7 @@ The following providers are used by this module:
 
 - [[provider_utils]] <<provider_utils,utils>> (>= 1)
 
-- [[provider_argocd]] <<provider_argocd,argocd>> (>= 4)
+- [[provider_argocd]] <<provider_argocd,argocd>> (>= 5)
 
 === Resources
 
@@ -344,7 +344,7 @@ Description: The MinIO root user password.
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[requirement_argocd]] <<requirement_argocd,argocd>> |>= 4
+|[[requirement_argocd]] <<requirement_argocd,argocd>> |>= 5
 |[[requirement_null]] <<requirement_null,null>> |>= 3
 |[[requirement_random]] <<requirement_random,random>> |>= 3
 |[[requirement_utils]] <<requirement_utils,utils>> |>= 1
@@ -357,7 +357,7 @@ Description: The MinIO root user password.
 |Name |Version
 |[[provider_random]] <<provider_random,random>> |>= 3
 |[[provider_utils]] <<provider_utils,utils>> |>= 1
-|[[provider_argocd]] <<provider_argocd,argocd>> |>= 4
+|[[provider_argocd]] <<provider_argocd,argocd>> |>= 5
 |[[provider_null]] <<provider_null,null>> |>= 3
 |===
 
