@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.0.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.1.2...v2.0.0) (2023-07-11)
+
+
+### ⚠ BREAKING CHANGES
+
+* add support to oboukili/argocd >= v5 ([#37](https://github.com/camptocamp/devops-stack-module-minio/issues/37))
+
+### Features
+
+* add support to oboukili/argocd &gt;= v5 ([#37](https://github.com/camptocamp/devops-stack-module-minio/issues/37)) ([bcf507c](https://github.com/camptocamp/devops-stack-module-minio/commit/bcf507ca2c83f400417dc1257fa37b61176d0963))
+* setup auto-upgrade helm chart ([#30](https://github.com/camptocamp/devops-stack-module-minio/issues/30)) ([085b53e](https://github.com/camptocamp/devops-stack-module-minio/commit/085b53e5184fbe3c15cf4780b17548e7f1c7053d))
+
+
+### Bug Fixes
+
+* chart version ([#32](https://github.com/camptocamp/devops-stack-module-minio/issues/32)) ([bf1d223](https://github.com/camptocamp/devops-stack-module-minio/commit/bf1d223e33434139c15e179d89bae98cbc2b2927))
+
 ## [1.1.2](https://github.com/camptocamp/devops-stack-module-minio/compare/v1.1.1...v1.1.2) (2023-06-09)
 
 
