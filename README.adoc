@@ -1,6 +1,6 @@
 = devops-stack-module-minio
 // Document attributes to replace along the document
-:chart-version: 5.0.9
+:minio-chart-version: 5.0.9
 :original-repo-url: https://github.com/minio/minio/tree/master/helm/minio
 
 A https://devops-stack.io[DevOps Stack] module to deploy https://min.io/[MinIO].
@@ -10,7 +10,7 @@ The MinIO chart used by this module is shipped in this repository as well, in or
 [cols="1,1,1",options="autowidth,header"]
 |===
 |Current Chart Version |Original Repository |Default Values
-|*{chart-version}* |{original-repo-url}[Chart] |https://artifacthub.io/packages/helm/minio-official/minio/{chart-version}?modal=values[`values.yaml`]
+|*{minio-chart-version}* |{original-repo-url}[Chart] |https://artifacthub.io/packages/helm/minio-official/minio/{chart-version}?modal=values[`values.yaml`]
 |===
 
 == Usage

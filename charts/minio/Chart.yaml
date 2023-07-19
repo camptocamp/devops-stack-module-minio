@@ -4,5 +4,5 @@ name: "minio"
 version: "0"
 dependencies:
   - name: "minio"
-    version: "5.0.9" # Fix the major version only.
+    version: "5.0.9"
     repository: "https://charts.min.io/"
