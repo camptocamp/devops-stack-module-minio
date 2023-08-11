@@ -7,6 +7,14 @@ resource "random_password" "minio_root_secretkey" {
   special = false
 }
 
+resource "vault_generic_secret" "minio_secrets" {
+  path  = "secret/devops-stack/minio"
+  data_json = jsonencode({
+    minio-root-secretkey = random_password.minio_root_secretkey.result
+    minio-oidc-client-secret = var.oidc.client_secret
+  })
+}
+
 resource "argocd_project" "this" {
   metadata {
     name      = "minio"
@@ -60,8 +68,12 @@ resource "argocd_application" "this" {
       repo_url        = "https://github.com/camptocamp/devops-stack-module-minio.git"
       path            = "charts/minio"
       target_revision = var.target_revision
-      helm {
-        values = data.utils_deep_merge_yaml.values.output
+      plugin {
+        name = "avp-helm"
+        env {
+          name  = "HELM_VALUES"
+          value = data.utils_deep_merge_yaml.values.output
+        }
       }
     }
 
