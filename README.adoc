@@ -1,6 +1,6 @@
 = devops-stack-module-minio
 // Document attributes to replace along the document
-:minio-chart-version: 5.0.9
+:minio-chart-version: 5.0.13
 :original-repo-url: https://github.com/minio/minio/tree/master/helm/minio
 
 A https://devops-stack.io[DevOps Stack] module to deploy https://min.io/[MinIO].
