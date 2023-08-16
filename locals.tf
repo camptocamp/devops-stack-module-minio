@@ -25,7 +25,7 @@ locals {
         enabled      = var.oidc.issuer_url != "" && var.oidc.client_id != "" && var.oidc.client_secret != ""
         configUrl    = "${var.oidc.issuer_url}/.well-known/openid-configuration"
         clientId     = var.oidc.client_id
-        clientSecret = "<path:secret/data/devops-stack/internal/minio#minio-oidc-client-secret>"
+        clientSecret = "<path:secret/data/devops-stack/minio/in-module#minio-oidc-client-secret>"
         claimName    = "policy"
         scopes       = "openid,profile,email"
         redirectUri  = "https://minio.apps.${var.cluster_name}.${var.base_domain}/oauth_callback"
@@ -73,7 +73,7 @@ locals {
           }
         }
         rootUser     = "root"
-        rootPassword = "<path:secret/data/devops-stack/internal/minio#minio-root-secretkey>"
+        rootPassword = "<path:secret/data/devops-stack/minio/in-module#minio-root-secretkey>"
         users        = var.config_minio.users
         buckets      = var.config_minio.buckets
         policies     = var.config_minio.policies
