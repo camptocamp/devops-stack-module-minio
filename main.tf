@@ -8,9 +8,9 @@ resource "random_password" "minio_root_secretkey" {
 }
 
 resource "vault_generic_secret" "minio_secrets" {
-  path  = "secret/devops-stack/minio"
+  path = "secret/devops-stack/internal/minio"
   data_json = jsonencode({
-    minio-root-secretkey = random_password.minio_root_secretkey.result
+    minio-root-secretkey     = random_password.minio_root_secretkey.result
     minio-oidc-client-secret = var.oidc.client_secret
   })
 }
