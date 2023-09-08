@@ -10,7 +10,7 @@ The MinIO chart used by this module is shipped in this repository as well, in or
 [cols="1,1,1",options="autowidth,header"]
 |===
 |Current Chart Version |Original Repository |Default Values
-|*{minio-chart-version}* |{original-repo-url}[Chart] |https://artifacthub.io/packages/helm/minio-official/minio/{chart-version}?modal=values[`values.yaml`]
+|*{minio-chart-version}* |{original-repo-url}[Chart] |https://artifacthub.io/packages/helm/minio-official/minio/{minio-chart-version}?modal=values[`values.yaml`]
 |===
 
 == Usage
