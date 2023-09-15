@@ -8,8 +8,10 @@ resource "random_password" "minio_root_secretkey" {
 }
 
 resource "argocd_project" "this" {
+  count = var.argocd_project == null ? 1 : 0
+
   metadata {
-    name      = "minio"
+    name      = var.destination_cluster != "in-cluster" ? "minio-${var.destination_cluster}" : "minio"
     namespace = var.argocd_namespace
     annotations = {
       "devops-stack.io/argocd_namespace" = var.argocd_namespace
@@ -17,11 +19,11 @@ resource "argocd_project" "this" {
   }
 
   spec {
-    description  = "MinIO application project"
+    description  = "MinIO application project for cluster ${var.destination_cluster}"
     source_repos = ["https://github.com/camptocamp/devops-stack-module-minio.git"]
 
     destination {
-      name      = "in-cluster"
+      name      = var.destination_cluster
       namespace = var.namespace
     }
 
@@ -42,7 +44,7 @@ data "utils_deep_merge_yaml" "values" {
 
 resource "argocd_application" "this" {
   metadata {
-    name      = "minio"
+    name      = var.destination_cluster != "in-cluster" ? "minio-${var.destination_cluster}" : "minio"
     namespace = var.argocd_namespace
   }
 
@@ -54,7 +56,7 @@ resource "argocd_application" "this" {
   wait = var.app_autosync == { "allow_empty" = tobool(null), "prune" = tobool(null), "self_heal" = tobool(null) } ? false : true
 
   spec {
-    project = argocd_project.this.metadata.0.name
+    project = var.argocd_project == null ? argocd_project.this[0].metadata.0.name : var.argocd_project
 
     source {
       repo_url        = "https://github.com/camptocamp/devops-stack-module-minio.git"
@@ -66,7 +68,7 @@ resource "argocd_application" "this" {
     }
 
     destination {
-      name      = "in-cluster"
+      name      = var.destination_cluster
       namespace = var.namespace
     }
 
