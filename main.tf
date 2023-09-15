@@ -46,6 +46,10 @@ resource "argocd_application" "this" {
   metadata {
     name      = var.destination_cluster != "in-cluster" ? "minio-${var.destination_cluster}" : "minio"
     namespace = var.argocd_namespace
+    labels = merge({
+      "application" = "minio"
+      "cluster"     = var.destination_cluster
+    }, var.argocd_labels)
   }
 
   timeouts {
