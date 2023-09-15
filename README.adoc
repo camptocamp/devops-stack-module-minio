@@ -114,7 +114,7 @@ This module is configured to used OIDC out-of-the-box, as long as the proper sco
 
 However, there is no way to configure the OIDC login as default on the login page, so take note that in order to use the OIDC login you need to click on _Other Authentication Methods_ then _Login using SSO (_)_, as shown in the screenshot below.
 
-image::login_page.png[MinIO Login Page]
+image::https://raw.githubusercontent.com/camptocamp/devops-stack-module-minio/main/docs/modules/ROOT/assets/images/login_page.png[link=https://raw.githubusercontent.com/camptocamp/devops-stack-module-minio/main/docs/modules/ROOT/assets/images/login_page.png,window=_blank]
 
 == Technical Reference
 
