@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.2.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v2.1.0...v2.2.0) (2023-10-19)
+
+
+### Features
+
+* add standard variables and variable to add labels to Argo CD app ([611aceb](https://github.com/camptocamp/devops-stack-module-minio/commit/611aceb503f1436960919efd8e9565563c6c5647))
+* add variables to set AppProject and destination cluster ([ad25865](https://github.com/camptocamp/devops-stack-module-minio/commit/ad25865f08ff1dcea77b915b48ebb5755b9dde80))
+
 ## [2.1.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v2.0.1...v2.1.0) (2023-08-14)
 
 
