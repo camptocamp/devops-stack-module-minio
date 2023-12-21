@@ -67,7 +67,8 @@ resource "argocd_application" "this" {
       path            = "charts/minio"
       target_revision = var.target_revision
       helm {
-        values = data.utils_deep_merge_yaml.values.output
+        release_name = "minio"
+        values       = data.utils_deep_merge_yaml.values.output
       }
     }
 
