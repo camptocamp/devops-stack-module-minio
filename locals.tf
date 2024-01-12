@@ -2,8 +2,6 @@ locals {
   domain      = format("minio.apps.%s", var.base_domain)
   domain_full = format("minio.apps.%s.%s", var.cluster_name, var.base_domain)
 
-  self_signed_cert_enabled = var.cluster_issuer == "ca-issuer" || var.cluster_issuer == "letsencrypt-staging"
-
   self_signed_cert = {
     extraVolumeMounts = [
       {
@@ -36,7 +34,7 @@ locals {
         comment      = ""
       }
     },
-    local.self_signed_cert_enabled ? local.self_signed_cert : null
+    var.cluster_issuer != "letsencrypt-prod" ? local.self_signed_cert : null
   ) : null
 
   helm_values = [{
