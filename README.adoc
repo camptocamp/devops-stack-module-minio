@@ -92,7 +92,7 @@ locals {
         accessKey = "thanos-user"
         secretKey = random_password.thanos_secretkey.result
         policy    = "thanos-policy"
-      }
+      }scope
     ],
     buckets = [
       {
@@ -110,21 +110,19 @@ TIP: Check the KinD deployment xref:ROOT:ROOT:tutorials/deploy_kind.adoc[tutoria
 
 === WebUI Login
 
-This module is configured to used OIDC out-of-the-box, as long as the proper scope is passed. You can check the https://min.io/docs/minio/linux/operations/external-iam/configure-keycloak-identity-management.html[official documentation] page to get more information about the way this is configured.
+This module is configured to used OIDC out-of-the-box, as long as the proper configuration is passed. You can check the https://min.io/docs/minio/linux/operations/external-iam/configure-keycloak-identity-management.html[official documentation] page to get more information about the way this is configured.
 
-However, there is no way to configure the OIDC login as default on the login page, so take note that in order to use the OIDC login you need to click on _Other Authentication Methods_ then _Login using SSO (_)_, as shown in the screenshot below.
-
-image::https://raw.githubusercontent.com/camptocamp/devops-stack-module-minio/main/docs/modules/ROOT/assets/images/login_page.png[link=https://raw.githubusercontent.com/camptocamp/devops-stack-module-minio/main/docs/modules/ROOT/assets/images/login_page.png,window=_blank]
+NOTE: The OIDC will not work with the `selfsigned-issuer` cluster issuer, which is the one deployed by default by the cert-manager module. You are required to use the `ca-issuer` or any of the Let's Encrypt issuers if you want to login to the MinIO Console using OIDC.
 
 == Technical Reference
 
 === Dependencies
 
-==== `module.traefik` and `module.cert-manager`
+==== `module.traefik.id` and `module.cert-manager.id`
 
 In order to have a working ingress to be able to access the web interface.
 
-==== `module.oidc`
+==== `module.oidc.id`
 
 In order to have the ability to login using OIDC.
 
