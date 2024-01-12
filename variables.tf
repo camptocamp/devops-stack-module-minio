@@ -48,12 +48,6 @@ variable "cluster_issuer" {
   default     = "selfsigned-issuer"
 }
 
-variable "namespace" {
-  description = "Namespace where the applications's Kubernetes resources should be created. Namespace will be created in case it doesn't exist."
-  type        = string
-  default     = "minio"
-}
-
 variable "enable_service_monitor" {
   description = "Enable Prometheus ServiceMonitor in the Helm chart."
   type        = bool

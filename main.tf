@@ -24,7 +24,7 @@ resource "argocd_project" "this" {
 
     destination {
       name      = var.destination_cluster
-      namespace = var.namespace
+      namespace = "minio"
     }
 
     orphaned_resources {
@@ -74,7 +74,7 @@ resource "argocd_application" "this" {
 
     destination {
       name      = var.destination_cluster
-      namespace = var.namespace
+      namespace = "minio"
     }
 
     sync_policy {

@@ -5,7 +5,7 @@ output "id" {
 
 output "endpoint" {
   description = "MinIO endpoint where the buckets are available."
-  value       = "minio.${var.namespace}:9000"
+  value       = "minio.minio:9000"
 }
 
 output "minio_root_user_credentials" {
