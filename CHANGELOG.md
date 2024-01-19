@@ -1,5 +1,21 @@
 # Changelog
 
+## [3.0.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v2.2.0...v3.0.0) (2024-01-19)
+
+
+### ⚠ BREAKING CHANGES
+
+* remove the ArgoCD namespace variable
+* remove the namespace variable
+
+### Bug Fixes
+
+* change condition to also support the selfsigned-issuer ([5cd6b70](https://github.com/camptocamp/devops-stack-module-minio/commit/5cd6b7051a882b46d9c386d6087ab2061490249f))
+* change the default cluster issuer ([07c8350](https://github.com/camptocamp/devops-stack-module-minio/commit/07c8350a4748e9d8829ed2b4a6b7f2ec1b20a74b))
+* hardcode the release name to remove the destination cluster ([a8b1fa4](https://github.com/camptocamp/devops-stack-module-minio/commit/a8b1fa477acc5fcb63a956ee77c0ca9e10859acb))
+* remove the ArgoCD namespace variable ([c800bb0](https://github.com/camptocamp/devops-stack-module-minio/commit/c800bb00179f58ce3e40a78bd6345e374f095f66))
+* remove the namespace variable ([c45a435](https://github.com/camptocamp/devops-stack-module-minio/commit/c45a435c29c390186d1ec38cbd55df34ffb53f13))
+
 ## [2.2.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v2.1.0...v2.2.0) (2023-10-19)
 
 
