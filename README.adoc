@@ -182,6 +182,14 @@ Type: `string`
 
 The following input variables are optional (have default values):
 
+==== [[input_subdomain]] <<input_subdomain,subdomain>>
+
+Description: Sub domain of the cluster. Value used for the ingress' URL of the application.
+
+Type: `string`
+
+Default: `"apps"`
+
 ==== [[input_argocd_project]] <<input_argocd_project,argocd_project>>
 
 Description: Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.
@@ -212,7 +220,7 @@ Description: Override of target revision of the application chart.
 
 Type: `string`
 
-Default: `"v2.2.0"`
+Default: `"v3.0.0"`
 
 ==== [[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
 
@@ -361,10 +369,10 @@ Description: The MinIO root user password.
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
+|[[provider_null]] <<provider_null,null>> |>= 3
 |[[provider_random]] <<provider_random,random>> |>= 3
 |[[provider_utils]] <<provider_utils,utils>> |>= 1
 |[[provider_argocd]] <<provider_argocd,argocd>> |>= 5
-|[[provider_null]] <<provider_null,null>> |>= 3
 |===
 
 = Resources
@@ -397,6 +405,12 @@ Description: The MinIO root user password.
 |n/a
 |yes
 
+|[[input_subdomain]] <<input_subdomain,subdomain>>
+|Sub domain of the cluster. Value used for the ingress' URL of the application.
+|`string`
+|`"apps"`
+|no
+
 |[[input_argocd_project]] <<input_argocd_project,argocd_project>>
 |Name of the Argo CD AppProject where the Application should be created. If not set, the Application will be created in a new AppProject only for this Application.
 |`string`
@@ -418,7 +432,7 @@ Description: The MinIO root user password.
 |[[input_target_revision]] <<input_target_revision,target_revision>>
 |Override of target revision of the application chart.
 |`string`
-|`"v2.2.0"`
+|`"v3.0.0"`
 |no
 
 |[[input_cluster_issuer]] <<input_cluster_issuer,cluster_issuer>>
