@@ -1,6 +1,6 @@
 locals {
-  domain      = format("minio.apps.%s", var.base_domain)
-  domain_full = format("minio.apps.%s.%s", var.cluster_name, var.base_domain)
+  domain      = format("minio.%s", trimprefix("${var.subdomain}.${var.base_domain}", "."))
+  domain_full = format("minio.%s.%s", trimprefix("${var.subdomain}.${var.cluster_name}", "."), var.base_domain)
 
   self_signed_cert = {
     extraVolumeMounts = [
