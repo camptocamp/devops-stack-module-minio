@@ -184,7 +184,7 @@ The following input variables are optional (have default values):
 
 ==== [[input_subdomain]] <<input_subdomain,subdomain>>
 
-Description: Sub domain of the cluster. Value used for the ingress' URL of the application.
+Description: Subdomain of the cluster. Value used for the ingress' URL of the application.
 
 Type: `string`
 
@@ -369,10 +369,10 @@ Description: The MinIO root user password.
 [cols="a,a",options="header,autowidth"]
 |===
 |Name |Version
-|[[provider_null]] <<provider_null,null>> |>= 3
 |[[provider_random]] <<provider_random,random>> |>= 3
 |[[provider_utils]] <<provider_utils,utils>> |>= 1
 |[[provider_argocd]] <<provider_argocd,argocd>> |>= 5
+|[[provider_null]] <<provider_null,null>> |>= 3
 |===
 
 = Resources
@@ -406,7 +406,7 @@ Description: The MinIO root user password.
 |yes
 
 |[[input_subdomain]] <<input_subdomain,subdomain>>
-|Sub domain of the cluster. Value used for the ingress' URL of the application.
+|Subdomain of the cluster. Value used for the ingress' URL of the application.
 |`string`
 |`"apps"`
 |no
