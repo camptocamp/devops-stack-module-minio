@@ -1,5 +1,18 @@
 # Changelog
 
+## [3.1.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.0.0...v3.1.0) (2024-02-23)
+
+
+### Features
+
+* add a subdomain variable ([6faaa3a](https://github.com/camptocamp/devops-stack-module-minio/commit/6faaa3a493860a22989e5277b8d2fd27c5b055ef))
+
+
+### Bug Fixes
+
+* make subdomain variable non-nullable ([571eba7](https://github.com/camptocamp/devops-stack-module-minio/commit/571eba7262c9cc142001761d75fb38d4b8947c16))
+* remove annotation for the redirection middleware ([2068608](https://github.com/camptocamp/devops-stack-module-minio/commit/20686087dac63e1a2bb8e822124b888a3b692a96))
+
 ## [3.0.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v2.2.0...v3.0.0) (2024-01-19)
 
 
