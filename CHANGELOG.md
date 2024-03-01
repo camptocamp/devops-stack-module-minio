@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.1.1](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.1.0...v3.1.1) (2024-03-01)
+
+
+### Bug Fixes
+
+* remove legacy ingress annotations ([88a4c91](https://github.com/camptocamp/devops-stack-module-minio/commit/88a4c9196e956e878b0ff1de2e4772c2fc217e8a))
+
 ## [3.1.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.0.0...v3.1.0) (2024-02-23)
 
 
