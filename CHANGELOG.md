@@ -1,5 +1,12 @@
 # Changelog
 
+## [3.2.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.1.1...v3.2.0) (2024-06-28)
+
+
+### Features
+
+* **chart:** minor update of dependencies on minio chart ([#54](https://github.com/camptocamp/devops-stack-module-minio/issues/54)) ([728289b](https://github.com/camptocamp/devops-stack-module-minio/commit/728289bb10cfd89e70dab84587b11a55fe9cecde))
+
 ## [3.1.1](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.1.0...v3.1.1) (2024-03-01)
 
 
