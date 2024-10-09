@@ -1,5 +1,16 @@
 # Changelog
 
+## [4.0.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.2.0...v4.0.0) (2024-10-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* point the Argo CD provider to the new repository ([#56](https://github.com/camptocamp/devops-stack-module-minio/issues/56))
+
+### Features
+
+* point the Argo CD provider to the new repository ([#56](https://github.com/camptocamp/devops-stack-module-minio/issues/56)) ([dcd5e12](https://github.com/camptocamp/devops-stack-module-minio/commit/dcd5e1215ed2d59d39f23ab4f1a1fa8592f58c6a))
+
 ## [3.2.0](https://github.com/camptocamp/devops-stack-module-minio/compare/v3.1.1...v3.2.0) (2024-06-28)
 
 
